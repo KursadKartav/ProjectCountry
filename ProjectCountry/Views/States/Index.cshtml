@@ -1,0 +1,117 @@
+﻿@model ProjectCountry.Models.WorldModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                State Name
+            </th>
+            <th>
+                Plate Code
+            </th>
+            <th>
+                Country Name
+            </th>
+            <th>
+                People Count
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item1 in Model.States)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item1.StateName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item1.PlateCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item1.Country.CountryName)
+                </td>
+                <td>
+                    <a asp-action="Index" asp-route-personId="@item1.StateId">@Html.DisplayFor(modeItem => item1.PersonCount)</a>
+                </td>
+                <td>
+                    <a asp-action="Index" asp-route-countryId="@item1.StateId">Select</a> |
+                    <a asp-action="Edit" asp-route-id="@item1.StateId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item1.StateId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item1.StateId">Delete</a> |
+                    <a asp-controller="People" asp-action="Create" asp-route-countryId="@item1.CountryId" asp-route-stateId="@item1.StateId">Add Person</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.Countries != null)
+{
+    <h3>
+        Selected List
+    </h3>
+    <table class="table">
+        <tr>
+            <th>
+                Country Name
+            </th>
+            <th>
+                Climate
+            </th>
+            <th>
+                Population
+            </th>
+        </tr>
+        @foreach (var item in Model.Countries)
+        {
+            <tr>
+                <td>
+                    @item.CountryName
+                </td>
+                <td>
+                    @item.Climate
+                </td>
+                <td>
+                    @item.Population
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+
+@if (Model.People != null && Model.People.Count() > 0)
+{
+    <h3>
+        People Informations
+    </h3>
+    <table class="table">
+        <tr>
+            <th> Person ID</th>
+            <th> Name</th>
+            <th> Last Name</th>
+        </tr>
+        @foreach (var item2 in Model.People)
+        {
+            <tr>
+                <td>
+                    @item2.PersonId
+                </td>
+                <td>
+                    @item2.Name
+                </td>
+                <td>
+                    @item2.LastName
+                </td>
+            </tr>
+        }
+    </table>
+}

@@ -1,0 +1,82 @@
+﻿@model ProjectCountry.Models.WorldModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Country Name
+            </th>
+            <th>
+                Climate
+            </th>
+            <th>
+                Population
+            </th>
+            <th>
+                State Count
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item1 in Model.Countries)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item1.CountryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item1.Climate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item1.Population)
+                </td>
+                <td>
+                    <a asp-action="Index" asp-route-statesId="@item1.CountryId">@Html.DisplayFor(modeItem => item1.StateCount)</a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item1.CountryId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item1.CountryId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item1.CountryId">Delete</a> |
+                    <a asp-controller="States" asp-action="Create" asp-route-countryId="@item1.CountryId">Add State</a>
+                    @*<a href="@Url.Action("Create","States")" target="_blank">Add State</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.States != null && Model.States.Count() > 0)
+{
+    <h3>
+        States Informations
+    </h3>
+    <table class="table">
+        <tr>
+            <th>Country ID</th>
+            <th>State Name</th>
+            <th>Plate Code</th>
+        </tr>
+        @foreach (var item in Model.States)
+        {
+            <tr>
+                <td>
+                    @item.CountryId
+                </td>
+                <td>
+                    @item.StateName
+                </td>
+                <td>
+                    @item.PlateCode
+                </td>
+            </tr>
+        }
+    </table>
+}

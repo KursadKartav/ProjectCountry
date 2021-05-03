@@ -1,0 +1,91 @@
+﻿@model ProjectCountry.Models.WorldModel
+@{
+    ViewData["Title"] = "CountryList";
+}
+
+<h1>CountryList</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Country Name
+            </th>
+            <th>
+                Climate
+            </th>
+            <th>
+                Population
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item1 in Model.Countries)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item1.CountryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item1.Climate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item1.Population)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item1.CountryId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item1.CountryId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item1.CountryId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                StateName
+            </th>
+            <th>
+                PlateCode
+            </th>
+            <th>
+                Country
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item2 in Model.States)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.StateName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.PlateCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.Country.CountryName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item2.StateId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item2.StateId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item2.StateId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@*Ülke listesini göster*@
+
+
+@*Her ülkenin bir linki olacak. Basıldığında bu ülkenin state lerini listeleyecek.*@
+
+@*Eğer state listesi boş değilse(model deki state listesi) bu stateleri aşağıda ekle*@
+
+
